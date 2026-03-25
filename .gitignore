@@ -1,0 +1,11 @@
+compact-cartridge.sh
+cartridges/all-in-one/
+cartridges/*-cc/
+*-cartridge.md
+.claude/
+.frame/
+.draft/
+FRAME-design.md
+FRAME-instructions.md
+misc/
+.DS_Store
