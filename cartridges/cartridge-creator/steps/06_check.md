@@ -1,3 +1,4 @@
+
 # Step 6 · CHECK
 Role: Validator
 
@@ -42,6 +43,7 @@ Apply this checklist to each file in turn.
 - [ ] Gate block contains `Commit label:` in format `phase-[N] [PHASE NAME]`
 - [ ] Gate block contains `Next SESSION.md header:` as a fenced markdown block with exact header text
 - [ ] Phase number in `Commit label:` matches the step file's position in the sequence
+- [ ] Phase number in `Next SESSION.md header:` accounts for BREAKDOWN at 2.5 — count the actual phase list; do not derive by adding 1 to the file count
 
 ### BREAKDOWN step file specifically
 - [ ] Phase number is 2.5 in Commit label
@@ -51,11 +53,11 @@ Apply this checklist to each file in turn.
 
 ### BUILD step file specifically
 - [ ] Per-unit gate present — fires after each unit, not only at phase end
-- [ ] `(check)` advance trigger present for all-units-complete path
+- [ ] Conditional gate format — "Next unit" variant when more units remain; "advance to CHECK" variant on the last unit only. Both options must not appear unconditionally in every gate.
 - [ ] Auto-commit format stated: `FRAME: phase-4 BUILD unit-N complete — [unit name]`
 
 ### CHECK step file (this file)
-- [ ] `Next SESSION.md header:` points to Phase 6 · CLOSE
+- [ ] `Next SESSION.md header:` points to the correct CLOSE phase number — derive by counting the actual phase list, not by adding 1 to the file count. BREAKDOWN at 2.5 does not consume a whole integer: a cartridge with phases 1/2/2.5/3/4/5 (CHECK) has CLOSE at Phase 6; a cartridge with phases 1/2/2.5/3/4 (CHECK) has CLOSE at Phase 5.
 
 ### RESEARCH step file (if present)
 - [ ] Positioned at phase 2 — Commit label is `phase-2 RESEARCH`

@@ -10,6 +10,36 @@ Run `/frame load cartridge-creator`. It guides you through domain analysis, phas
 
 ---
 
+## Adapting an existing cartridge
+
+If an existing cartridge is close to what you need, don't run cartridge-creator — copy and adapt. The engine integration points stay identical; only the domain-specific content changes.
+
+**When to adapt vs build from scratch:** adapt when the phase structure is the same and you're adjusting roles and step instructions for a specific context. Build from scratch when the phase structure itself is different.
+
+**Example: tailoring `sw-development` for a web project**
+
+```bash
+cp -r ~/.frame/cartridges/sw-development/ ~/.frame/cartridges/web-development/
+```
+
+Then edit:
+
+- `README.md` — update name, version, and domain description
+- `roles.md` — specialise roles (e.g. Architect → Frontend Architect / Backend Architect; Developer → split by layer if needed)
+- `steps/03_design.md` — add web-specific architecture questions (routing, state management, API contract)
+- `steps/04_build.md` — add web-specific build instructions (component structure, CSS approach, bundler config)
+
+Leave untouched:
+- Phase sequence and file numbering
+- Gate block format (`FRAME ▸ ... complete.`)
+- Commit label format
+- SESSION.md header format
+- BREAKDOWN phase (2.5) — never renumber or rename
+
+The gate blocks, commit labels, and SESSION.md headers are how the engine tracks state. Any change to their format breaks phase transitions.
+
+---
+
 ## Folder structure
 
 ```

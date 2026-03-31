@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate cartridge structure
+        run: |
+          fail=0
+          for cartridge in cartridges/*/; do
+            name=$(basename "$cartridge")
+            # Internal dirs — not release cartridges
+            [[ "$name" == "all-in-one" ]] && continue
+            if [ ! -f "$cartridge/README.md" ]; then
+              echo "FAIL: $name — missing README.md"
+              fail=1
+            elif [ ! -f "$cartridge/roles.md" ]; then
+              echo "FAIL: $name — missing roles.md"
+              fail=1
+            elif [ ! -d "$cartridge/steps" ]; then
+              echo "FAIL: $name — missing steps/"
+              fail=1
+            elif ! ls "$cartridge/steps/"*.md > /dev/null 2>&1; then
+              echo "FAIL: $name — steps/ contains no .md files"
+              fail=1
+            else
+              echo "OK: $name"
+            fi
+          done
+          exit $fail
+
+      - name: Smoke-test install.sh
+        run: |
+          export HOME=$(mktemp -d)
+          bash install.sh
+          # Verify engine installed
+          [ -f "$HOME/.claude/commands/frame.md" ] || \
+            { echo "FAIL: engine not found at ~/.claude/commands/frame.md"; exit 1; }
+          # Verify at least one cartridge installed
+          cartridge_count=$(ls -d "$HOME/.frame/cartridges/"*/ 2>/dev/null | wc -l)
+          [ "$cartridge_count" -gt 0 ] || \
+            { echo "FAIL: no cartridges installed to ~/.frame/cartridges/"; exit 1; }
+          echo "OK: engine installed"
+          echo "OK: $cartridge_count cartridge(s) installed"

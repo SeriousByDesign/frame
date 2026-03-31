@@ -142,7 +142,7 @@ Acceptance : Git tag `v0.1.0` exists; GitHub release created on `SeriousByDesign
 Scope      : Git tag, GitHub release creation, release notes, collaborator invites; excludes public launch
 Systems    : git tags, GitHub releases, GitHub collaborator settings
 Path       : contained
-Status     : pending
+Status     : done — v0.1.0 tagged; GitHub release created on SeriousByDesign/frame (private mode); beta collaborator invites ongoing
 
 ---
 
@@ -166,4 +166,4 @@ _Last ordered: 2026-03-23 · Re-run this step if new backlog entries are added._
 14. PREP-008 · fast path evaluation — done
 15. PREP-009 · fast path implementation — done
 16. SHIP-001 · GitHub repository setup — done
-17. SHIP-002 · v0.1 release — requires all PREP items closed
+17. SHIP-002 · v0.1 release — done

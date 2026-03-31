@@ -36,9 +36,10 @@ Apply these requirements to every file:
 
 **Phase numbers must be consistent.** The phase number in the `Commit label:` must match the step file's position in the sequence and match the phase table in README.md. File number and step number must match — `01_shape.md` is Step 1, `02_[name].md` is Step 2, and so on.
 
+**Phase numbers in `Next SESSION.md header:` must account for BREAKDOWN at 2.5.** Count the actual phase list — do not add 1 to the file count. A cartridge with phases SHAPE/DESIGN/BREAKDOWN/BUILD/CHECK has phases 1/2/2.5/3/4 and CLOSE is Phase 5. A cartridge with an extra phase between BREAKDOWN and BUILD has phases 1/2/2.5/3/4/5 and CLOSE is Phase 6.
+
 **BUILD step file** specifically:
-- Per-unit gate mechanic — a gate that fires after each unit, not only at phase end
-- `(check)` advance trigger present for when all units are complete
+- Per-unit gate mechanic — conditional format: "Next unit" gate when more units remain; "advance to CHECK" gate on the last unit only. Do not show both options unconditionally — the all-units-complete line must only appear after the final unit.
 - Auto-commit format per unit: `FRAME: phase-4 BUILD unit-N complete — [unit name]`
 
 **RESEARCH step file** (if cartridge includes one):
@@ -90,6 +91,7 @@ Update BREAKDOWN.md — mark unit complete:
 
 ## Gate (per unit)
 
+**If more units remain:**
 ```
 FRAME ▸ BUILD · Unit N complete.
 
@@ -99,7 +101,18 @@ FRAME ▸ BUILD · Unit N complete.
   .draft/[cartridge-name]/[filename] updated.
   SESSION.md + BREAKDOWN.md updated.
   → Next unit: Unit N+1? (y / adjust / pause)
-  → All units complete — advance to CHECK? (check)
+```
+
+**If this was the last unit:**
+```
+FRAME ▸ BUILD · Unit N complete.
+
+  Summary: [1-2 lines — file written, any deviations]
+  Open:    [anything flagged for CHECK]
+
+  .draft/[cartridge-name]/[filename] updated.
+  SESSION.md + BREAKDOWN.md updated.
+  → All units complete — advance to CHECK? (y / adjust / pause)
 ```
 
 Auto-commit per unit:

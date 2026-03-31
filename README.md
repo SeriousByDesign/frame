@@ -2,6 +2,8 @@
 
 ![FRAME](assets/banner.png)
 
+![CI](https://github.com/SeriousByDesign/frame-private/actions/workflows/ci.yml/badge.svg)
+
 A prompt-native workflow engine for Claude Code. FRAME guides AI sessions through structured, role-switched workflows using swappable domain cartridges — with no tooling overhead, no multi-agent complexity, and no file sprawl.
 
 ---
@@ -44,6 +46,7 @@ FRAME then guides you from requirements through architecture, implementation, an
 | `linkedin-profile` | LinkedIn profile authorship from a CV | Publish-ready profile sections |
 | `code-audit` | Code audit — quality/architecture review, security audit, or both | Prioritised findings report |
 | `project-planner` | Project planning — backlog generation and milestone structuring | BACKLOG.md with prioritised work items |
+| `document-and-commit` | Document and commit code changes made outside of FRAME | Commit message, changelog entry, doc updates |
 | `cartridge-creator` | FRAME cartridge authorship | New or modified cartridge |
 
 FRAME is the platform; cartridges are the product. Session quality scales with cartridge quality — the included cartridges are the validated baseline. Custom cartridges are fully supported via `cartridge-creator`.
@@ -187,7 +190,7 @@ Domain: code audit — quality/architecture review and security audit of existin
 
 FRAME has no tool configuration of its own. Tool availability is managed through `CLAUDE.md` at the project root — the standard Claude Code mechanism. Skills, MCP servers, and custom commands declared there are available to FRAME step files, which reference them by name when relevant.
 
-Example: a cartridge step that uses a NotebookLM skill simply calls `/notebooklm` — no FRAME configuration needed, as long as the skill is declared in `CLAUDE.md`.
+**Example:** a cartridge step that uses a NotebookLM skill simply calls `/notebooklm` — no FRAME configuration needed, as long as the skill is declared in `CLAUDE.md`.
 
 ```markdown
 ## Research
@@ -218,7 +221,15 @@ Cartridges use domain-based kebab-case — the name describes the kind of work, 
 
 Run `/frame load cartridge-creator` to design and write a new cartridge from scratch, or to modify an existing one. The cartridge-creator guides you through domain analysis, phase design, role definition, file authorship, and compliance validation — producing a ready-to-install cartridge at `~/.frame/cartridges/[name]/`.
 
+If an existing cartridge is close to what you need, don't start from scratch — copy it, adjust the roles and step instructions for your domain, and leave the engine integration points untouched. A tailored `sw-development` variant for a specific stack takes minutes, not a full cartridge-creator session.
+
 See `docs/cartridge-authoring.md` for the full guide.
+
+---
+
+## Workflows
+
+Common patterns — new project kickoff, code-fix, pre-release audit, codebase health → backlog, and more — are documented in `docs/workflows.md`.
 
 ---
 
@@ -249,7 +260,7 @@ See `docs/cartridge-authoring.md` for the full guide.
 
 ## Status
 
-v0.1 — validated across seven real-world runs spanning software development, blog writing, LinkedIn profile creation, and cartridge authorship. All core decisions closed.
+v0.1 — validated across several real-world runs spanning software development, blog writing, LinkedIn profile creation, and cartridge authorship. All core decisions closed.
 
 ---
 

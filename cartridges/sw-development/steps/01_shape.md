@@ -1,5 +1,3 @@
-
-
 # Step 1 · SHAPE
 Role: Requirements Engineer
 
@@ -141,7 +139,7 @@ FRAME ▸ SHAPE complete.
   → Advance to BREAKDOWN? (y / adjust / pause)
 ```
 
-Commit label: `phase-1 SHAPE`
+Commit label: `phase-2 SHAPE`
 
 Next SESSION.md header:
 ```markdown
@@ -164,7 +162,7 @@ FRAME ▸ SHAPE complete.
   → Advance to BREAKDOWN? (y / adjust / pause)
 ```
 
-Commit label: `phase-1 SHAPE`
+Commit label: `phase-2 SHAPE`
 
 Next SESSION.md header:
 ```markdown
@@ -172,6 +170,3 @@ Next SESSION.md header:
 Role   : Orchestrator
 Status : in progress
 ```
-
----
-
