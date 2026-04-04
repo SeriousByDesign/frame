@@ -8,6 +8,7 @@ cartridges/*-cc/
 FRAME-design.md
 FRAME-instructions.md
 misc/
+tools/
 .DS_Store
 cartridges/launch-planner/
 
