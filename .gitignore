@@ -7,6 +7,7 @@ cartridges/*-cc/
 .draft/
 FRAME-design.md
 FRAME-instructions.md
+LAUNCH_PLAN.md
 misc/
 tools/
 .DS_Store
