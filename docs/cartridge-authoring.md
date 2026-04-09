@@ -42,19 +42,36 @@ The gate blocks, commit labels, and SESSION.md headers are how the engine tracks
 
 ## Folder structure
 
+Without RESEARCH:
+
 ```
 ~/.frame/cartridges/[cartridge-name]/
 ├── README.md
 ├── roles.md
 └── steps/
     ├── 01_shape.md
-    ├── 02_breakdown.md      ← always 03_ if RESEARCH is included
+    ├── 02_breakdown.md
     ├── 03_design.md
     ├── 04_build.md
     └── 05_check.md
 ```
 
-File numbers must match step numbers — `01_shape.md` is Step 1, `02_breakdown.md` is Step 2, and so on. BREAKDOWN is always phase 2.5 but its file number reflects sequence position, not phase number.
+With RESEARCH:
+
+```
+~/.frame/cartridges/[cartridge-name]/
+├── README.md
+├── roles.md
+└── steps/
+    ├── 01_shape.md
+    ├── 02_research.md
+    ├── 03_breakdown.md
+    ├── 04_design.md
+    ├── 05_build.md
+    └── 06_check.md
+```
+
+File numbers reflect sequence position. BREAKDOWN is always phase 2.5 regardless of its file number.
 
 ---
 

@@ -38,7 +38,7 @@ FRAME ▸ Commands
 
 List available cartridges from both the global library and the project-local override.
 
-Do not use bash to gather this information. Instead, use the file read tool directly:
+Allow bash for the directory listing step only. Do not use bash otherwise. Instead, use the file read tool directly:
 
 1. Read `~/.frame/cartridges/` directory listing — for each subdirectory, read its `README.md` and extract the version number from the `Version:` line
 2. Read `.frame/cartridges/` directory listing in cwd — same, if the directory exists
@@ -98,12 +98,14 @@ FRAME ▸ Existing session found in this directory.
         Project : [goal from PROJECT.md]
         Phase   : [current phase from SESSION.md]
 
+        Starting a new session will clear all phase archives.
+
         → Resume existing session? (/frame resume)
         → Start new session? (overwrites .frame/ state)
         → Abort?
 ```
 
-Wait for explicit user response. Do not advance, do not overwrite. If "start new session", proceed. If "resume", stop and run `/frame resume`. If "abort", stop.
+Wait for explicit user response. Do not advance, do not overwrite. If "start new session", run `rm -rf .frame/archive/` then proceed. If "resume", stop and run `/frame resume`. If "abort", stop.
 
 3. If `--no-code-commits` flag is present, record it in PROJECT.md — auto-commits will include `.frame/` files only for this session.
 
@@ -337,7 +339,23 @@ Status : complete
 Branch : [merged / not merged / none]
 ```
 
-4. Output:
+4. Write a `## Handoff` section to `.frame/PROJECT.md` — append, do not overwrite:
+
+```markdown
+## Handoff
+Closed : [date]
+
+[2–3 lines: what was built, key outputs]
+
+How to run:
+[commands from the session — run, test, build]
+
+Next step: [explicit next action — e.g. deploy command, cartridge to load, PR to open]
+```
+
+The Orchestrator writes this from session knowledge — same content that would appear in the CLOSE gate output. Keep it terse and actionable.
+
+5. Output:
 
 ```
 FRAME ▸ Session complete.
@@ -347,10 +365,10 @@ FRAME ▸ Session complete.
   Units    : [N complete]
   Branch   : [merged into [base] / not merged / none]
 
-  .frame/ archived. Safe to /clear.
+  PROJECT.md updated with Handoff. Safe to /clear.
 ```
 
-5. Auto-commit:
+6. Auto-commit:
 
 ```
 FRAME: session closed

@@ -147,6 +147,8 @@ FRAME is designed for long sessions that span multiple context windows. The paus
 
 FRAME reminds you at every unit gate and phase gate that state is saved and it's safe to `/clear`. The context bar is visible — the decision of when to clear is yours.
 
+**Tip:** If your statusline doesn't show context usage, ask Claude Code to add a context bar to it.
+
 ---
 
 ## Auto-commit

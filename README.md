@@ -32,7 +32,7 @@ FRAME then guides you from requirements through architecture, implementation, an
 - **Prompt-native** — lives entirely in Claude Code conventions; zero tooling overhead
 - **Token-lean** — no verbose narration, compressed summaries, no redundant preamble
 - **Single-thread** — one role active at a time; no multi-agent orchestration
-- **Minimal artifact set** — three files: `PROJECT.md`, `BREAKDOWN.md`, `SESSION.md`
+- **Minimal artifact set** — `PROJECT.md`, `BREAKDOWN.md`, `SESSION.md`, and phase archives in `.frame/archive/` — nothing more
 - **Domain-agnostic core** — cartridges define the domain; the engine stays neutral
 
 ---
@@ -45,8 +45,11 @@ FRAME then guides you from requirements through architecture, implementation, an
 | `blog-writing` | Blog posts, articles, essays | Publishable draft |
 | `linkedin-profile` | LinkedIn profile authorship from a CV | Publish-ready profile sections |
 | `code-audit` | Code audit — quality/architecture review, security audit, or both | Prioritised findings report |
-| `project-planner` | Project planning — backlog generation and milestone structuring | BACKLOG.md with prioritised work items |
+| `codebase-analysis` | Structural analysis of an existing codebase | Report set + `ADVICE.md` |
+| `project-planner` | Project planning — backlog generation and milestone structuring | `BACKLOG.md` with prioritised work items |
+| `findings-to-tasks` | Turn audit or analysis findings into tracked tasks | Tasks in Jira, Linear, or similar |
 | `document-and-commit` | Document and commit code changes made outside of FRAME | Commit message, changelog entry, doc updates |
+| `skill-creation` | Build a new Claude Code skill | Ready-to-install skill file |
 | `cartridge-creator` | FRAME cartridge authorship | New or modified cartridge |
 
 FRAME is the platform; cartridges are the product. Session quality scales with cartridge quality — the included cartridges are the validated baseline. Custom cartridges are fully supported via `cartridge-creator`.
@@ -243,9 +246,14 @@ Common patterns — new project kickoff, code-fix, pre-release audit, codebase h
 ├── sw-development/
 ├── blog-writing/
 ├── code-audit/
+├── codebase-analysis/
+├── document-and-commit/
+├── findings-to-tasks/
 ├── linkedin-profile/
 ├── project-planner/
-└── cartridge-creator/
+├── skill-creation/
+├── cartridge-creator/
+└── ...                       ← custom cartridges
 
 [project root]/
 ├── CLAUDE.md                 ← project config (skills, MCP servers, custom commands)
@@ -258,9 +266,23 @@ Common patterns — new project kickoff, code-fix, pre-release audit, codebase h
 
 ---
 
+## Why I built this
+
+I was trying GSD for Claude Code development sessions, liked it a lot and it worked — but it consumed more tokens than I wanted, over-documented things that didn't need documenting, and felt like it was built for a specific way of working rather than something I could adapt to different kinds of tasks.
+
+The thing that bothered me most: software development and writing a blog post are fundamentally different activities, but the workflow tooling treated them the same. Different domains need different phases, different roles, different questions. A requirements engineer has no business showing up in a content session.
+
+Before building anything new I tried to fix the problem from the outside — I built a NotebookLM skill for token-efficient web searches and wrote a patch script to hook it into GSD. It helped, but patching around a tool's assumptions only gets you so far.
+
+So I started thinking about something modular — a fixed engine that handles the structure (phases, gates, state, commits) and swappable cartridges that define the domain-specific workflow and the roles that run it. The engine never changes; the cartridge tells it what to do for this kind of work.
+
+I didn't know if anything like that existed. I built FRAME to find out.
+
+---
+
 ## Status
 
-v0.1 — validated across several real-world runs spanning software development, blog writing, LinkedIn profile creation, and cartridge authorship. All core decisions closed.
+v0.3.0 — production-validated across multiple real-world sessions spanning software development, blog writing, LinkedIn profile creation, code auditing, codebase analysis, project planning, and cartridge authorship. Ten cartridges included. Core engine decisions closed. Active development continues — contributions welcome.
 
 ---
 

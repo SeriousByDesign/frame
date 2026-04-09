@@ -8,6 +8,7 @@ cartridges/*-cc/
 FRAME-design.md
 FRAME-instructions.md
 LAUNCH_PLAN.md
+release-sequence.sh
 misc/
 tools/
 .DS_Store

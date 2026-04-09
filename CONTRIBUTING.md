@@ -10,6 +10,7 @@ Thanks for your interest in contributing. FRAME is a prompt-native workflow engi
 - **Cartridge improvements** — a phase is unclear, a gate is missing something, a role definition is off? PRs welcome.
 - **New cartridges** — use `/frame load cartridge-creator` to design and author a new cartridge, then submit it as a PR.
 - **Engine changes** — changes to `engine/frame.md` affect all cartridges and all users. Open an issue first to discuss before submitting a PR.
+- **Feature requests** — have an idea for a new cartridge, an engine improvement, or a workflow enhancement? Open an issue using the feature request template. Describe the problem first, not the solution — and check whether `cartridge-creator` already covers your use case before submitting.
 - **Documentation** — README, `docs/cartridge-authoring.md`, `docs/concepts.md` — clarity improvements always welcome.
 
 ---

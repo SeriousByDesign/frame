@@ -1,5 +1,7 @@
 # FRAME — Inputs, Outputs & Workflows
 
+This is a selection of workflows based on the cartridges currently included with FRAME. It is not exhaustive — new cartridges create new workflows and new combinations.
+
 ---
 
 ## Cartridge reference

@@ -1,3 +1,5 @@
+# sw-development/steps/05_check.md
+
 # Step 5 · CHECK
 Role: Code Reviewer → QA Engineer
 
@@ -86,6 +88,9 @@ Write tests for boundary conditions. If a case is genuinely impractical to autom
 
 **Deferred from BUILD**
 Check `## Tests written` in each BUILD unit output. Any item marked as deferred without justification must be covered now.
+
+**Runtime version constraints**
+If a runtime version constraint (Node, npm, engine version, peer dependency) was added or changed during this session — including inline during CHECK — run the full test suite now to confirm it passes under the actual constraint. Do not sign off on version documentation without a passing test run.
 
 ### Output format
 

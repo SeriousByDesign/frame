@@ -1,3 +1,7 @@
+# sw-development/steps/01_shape.md
+
+
+
 # Step 1 · SHAPE
 Role: Requirements Engineer
 
@@ -30,10 +34,10 @@ Present the two options. Recommend one based on any context clues in the goal.
 
 If the user answers "existing codebase", immediately ask as a follow-up:
 
-**2a-i. Feature branch?**
+**2a-i. Branch?**
 ```
 FRAME ▸ Working on an existing codebase.
-        → Create a feature branch for this session? (y / skip)
+        → Create a branch for this session? (y / skip)
 ```
 If `y` — ask for the branch name, then run `git checkout -b [name]` and record it in PROJECT.md:
 ```
@@ -139,7 +143,7 @@ FRAME ▸ SHAPE complete.
   → Advance to BREAKDOWN? (y / adjust / pause)
 ```
 
-Commit label: `phase-2 SHAPE`
+Commit label: `phase-1 SHAPE`
 
 Next SESSION.md header:
 ```markdown
@@ -162,7 +166,7 @@ FRAME ▸ SHAPE complete.
   → Advance to BREAKDOWN? (y / adjust / pause)
 ```
 
-Commit label: `phase-2 SHAPE`
+Commit label: `phase-1 SHAPE`
 
 Next SESSION.md header:
 ```markdown
@@ -170,3 +174,9 @@ Next SESSION.md header:
 Role   : Orchestrator
 Status : in progress
 ```
+
+---
+
+
+---
+
