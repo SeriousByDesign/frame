@@ -2,7 +2,7 @@
 
 ![FRAME](assets/banner.png)
 
-![CI](https://github.com/SeriousByDesign/frame-private/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/SeriousByDesign/frame/actions/workflows/ci.yml/badge.svg)
 
 A prompt-native workflow engine for Claude Code. FRAME guides AI sessions through structured, role-switched workflows using swappable domain cartridges — with no tooling overhead, no multi-agent complexity, and no file sprawl.
 
@@ -58,13 +58,10 @@ FRAME is the platform; cartridges are the product. Session quality scales with c
 
 ## Installation
 
-**One-liner (recommended):**
-```bash
-curl -fsSL https://raw.githubusercontent.com/SeriousByDesign/frame/master/install.sh | bash
-```
-
 **From a local clone:**
 ```bash
+git clone https://github.com/SeriousByDesign/frame.git
+cd frame
 bash install.sh           # interactive — prompts before overwriting
 bash install.sh --force   # overwrite everything, no prompts
 ```
@@ -81,7 +78,9 @@ Windows: run via Git Bash (ships with Git for Windows) or WSL (Windows Subsystem
 
 **1. Install**
 ```bash
-curl -fsSL https://raw.githubusercontent.com/SeriousByDesign/frame/master/install.sh | bash
+git clone https://github.com/SeriousByDesign/frame.git
+cd frame
+bash install.sh
 ```
 
 **2. Load a cartridge in your project**
