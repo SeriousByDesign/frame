@@ -1,7 +1,5 @@
 # sw-development/steps/01_shape.md
 
-
-
 # Step 1 · SHAPE
 Role: Requirements Engineer
 
@@ -34,7 +32,28 @@ Present the two options. Recommend one based on any context clues in the goal.
 
 If the user answers "existing codebase", immediately ask as a follow-up:
 
-**2a-i. Branch?**
+**2a-i. Repo & branch?**
+
+First, check whether a git repository exists at the codebase path (`git rev-parse --is-inside-work-tree`).
+
+**No repo found:**
+```
+FRAME ▸ No git repository found at codebase path.
+        → Initialise one and commit the current state to main before creating a feature branch? (y / skip)
+```
+If `y` — run:
+```
+git init
+git add .
+git commit -m "Initial commit — existing codebase baseline"
+```
+Then ask for the branch name and run `git checkout -b [name]`. Record in PROJECT.md:
+```
+Branch : [branch name]
+```
+If `skip` — run `git init` only, leave PROJECT.md `Branch : none`, proceed.
+
+**Repo exists:**
 ```
 FRAME ▸ Working on an existing codebase.
         → Create a branch for this session? (y / skip)
@@ -98,7 +117,7 @@ If both are true, the **contained fix path** (skip DESIGN) is appropriate. State
 When you have clear answers to all areas, write the following block to SESSION.md and confirm it with the user before closing the gate:
 
 ```markdown
-# SESSION  Phase 2 · SHAPE
+# SESSION  Phase 1 · SHAPE
 Role   : Requirements Engineer
 Status : complete
 
@@ -174,6 +193,9 @@ Next SESSION.md header:
 Role   : Orchestrator
 Status : in progress
 ```
+
+---
+
 
 ---
 
