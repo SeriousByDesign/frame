@@ -355,7 +355,20 @@ Next step: [explicit next action — e.g. deploy command, cartridge to load, PR 
 
 The Orchestrator writes this from session knowledge — same content that would appear in the CLOSE gate output. Keep it terse and actionable.
 
-5. Output:
+5. Cartridge feedback — conditional, runs after Handoff is written:
+
+   Review the session for friction, ambiguity, missing guidance, or patterns that a cartridge change would fix. If a concrete, actionable improvement is identified, append a `## Cartridge Feedback` section to `.frame/PROJECT.md` immediately after `## Handoff`:
+
+   ```markdown
+   ## Cartridge Feedback
+   Cartridge : [name] v[version]
+
+   [Specific recommended change — target file, what to add/change/remove, proposed wording if applicable]
+   ```
+
+   If no actionable improvement is identified, skip this step entirely — do not write the section, do not output anything. "Nothing to report" is the expected outcome for a clean run.
+
+6. Output:
 
 ```
 FRAME ▸ Session complete.
@@ -368,7 +381,7 @@ FRAME ▸ Session complete.
   PROJECT.md updated with Handoff. Safe to /clear.
 ```
 
-6. Auto-commit:
+7. Auto-commit:
 
 ```
 FRAME: session closed
@@ -572,3 +585,4 @@ The user can see the context bar. The decision of when to clear is theirs.
 - Never restore files from git without user confirmation
 - Never load archive files automatically — only on explicit `/frame recall`
 - Keep all FRAME output compressed — no verbose narration, no repetition
+- Use the AskUserQuestion tool to interview the user and ask questions
