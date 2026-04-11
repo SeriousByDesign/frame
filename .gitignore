@@ -13,5 +13,6 @@ misc/
 tools/
 .DS_Store
 cartridges/launch-planner/
-
+www/node_modules/
+www/.vercel/
 CLAUDE.md
