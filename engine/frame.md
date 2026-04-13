@@ -144,6 +144,16 @@ FRAME ▸ Session mode: express or full?
 
 Wait for explicit user response. If the cartridge does not declare `Express: supported`, proceed as full mode silently — do not ask.
 
+4.7. If `.frame/run-config.md` exists and its `Cartridge:` field matches the cartridge being loaded, prompt the user:
+
+```
+FRAME ▸ Run config found for [cartridge name].
+        Saved: [date from run-config.md]
+        → Load it for this run? (y / n)
+```
+
+If `y`, read the file and hold it in context — it will be injected as prior context at the start of SHAPE. If `n`, ignore the file and proceed with a clean SHAPE interview. If the cartridge name does not match, ignore the file silently.
+
 5. Write `.frame/PROJECT.md`:
 
 ```markdown
@@ -179,6 +189,8 @@ FRAME ▸ Cartridge loaded: [name] v[version]
 ```
 
 8. Immediately begin the first cartridge step (`steps/01_shape.md`).
+
+   If a run-config was loaded in step 4.7, inject it at the start of SHAPE as prior context — before the interview begins. The active role uses it naturally: presenting a summary of known values, confirming with the user, and asking only for anything missing or changed. Do not announce the injection as a system event.
 
 ---
 
@@ -367,6 +379,26 @@ The Orchestrator writes this from session knowledge — same content that would 
    ```
 
    If no actionable improvement is identified, skip this step entirely — do not write the section, do not output anything. "Nothing to report" is the expected outcome for a clean run.
+
+5.5. If the cartridge README declares `Run config: supported`, ask the user:
+
+```
+FRAME ▸ Save run config for next run? (y / n)
+        Saves SHAPE values to .frame/run-config.md — loaded automatically on next load.
+```
+
+   If `y`, write `.frame/run-config.md`:
+
+   ```markdown
+   # run-config.md
+   Cartridge : [name] v[version]
+   Saved     : [date]
+
+   ## SHAPE values
+   [All values collected during SHAPE, as key: value pairs]
+   ```
+
+   If `n`, skip silently. If an existing `.frame/run-config.md` is present from a previous run, overwrite it.
 
 6. Output:
 

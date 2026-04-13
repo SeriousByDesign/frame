@@ -42,36 +42,19 @@ The gate blocks, commit labels, and SESSION.md headers are how the engine tracks
 
 ## Folder structure
 
-Without RESEARCH:
-
 ```
 ~/.frame/cartridges/[cartridge-name]/
 ├── README.md
 ├── roles.md
 └── steps/
     ├── 01_shape.md
-    ├── 02_breakdown.md
+    ├── 02_breakdown.md      ← always 03_ if RESEARCH is included
     ├── 03_design.md
     ├── 04_build.md
     └── 05_check.md
 ```
 
-With RESEARCH:
-
-```
-~/.frame/cartridges/[cartridge-name]/
-├── README.md
-├── roles.md
-└── steps/
-    ├── 01_shape.md
-    ├── 02_research.md
-    ├── 03_breakdown.md
-    ├── 04_design.md
-    ├── 05_build.md
-    └── 06_check.md
-```
-
-File numbers reflect sequence position. BREAKDOWN is always phase 2.5 regardless of its file number.
+File numbers must match step numbers — `01_shape.md` is Step 1, `02_breakdown.md` is Step 2, and so on. BREAKDOWN is always phase 2.5 but its file number reflects sequence position, not phase number.
 
 ---
 
@@ -83,6 +66,7 @@ Required fields:
 # [Cartridge Name]
 Version: [N.N]
 Express: supported          ← optional — include only if the cartridge supports express mode
+Run config: supported       ← optional — include only if the cartridge supports run-config persistence
 Domain: [precise description — not generic]
 
 [One paragraph describing what the cartridge does and who uses it]
@@ -252,6 +236,8 @@ These runtime behaviours are proven across real FRAME sessions. Apply the ones r
 **Scaffolding in temp dir.** For code cartridges: BUILD must warn to run scaffolding tools in a temp subdirectory first, then move files to project root. Running scaffolding tools in the project root may wipe `.frame/`.
 
 **Progressive writes.** Write to SESSION.md as work is produced — not batched at gate close. Especially important in CHECK, where per-unit results must be appended immediately so they are recoverable if the session is interrupted.
+
+**Run config.** If the cartridge is likely to be run repeatedly against the same target (e.g. deploy, publish, release), declare `Run config: supported` in the cartridge README. At CLOSE, the engine will ask the user whether to save SHAPE values to `.frame/run-config.md`. On the next `/frame load`, the engine detects the file, verifies the `Cartridge:` field matches, and asks the user whether to load it — injecting the values as prior context at the start of SHAPE. The user can accept, skip, or start fresh. Only declare this for cartridges where re-entering SHAPE from scratch on every run is genuinely wasteful.
 
 **Express mode.** If the domain has tasks that are genuinely self-contained and small enough to plan and execute in a single pass, declare `Express: supported` in the cartridge README. The engine will ask the user to choose `express` or `full` at load time. Express mode skips BREAKDOWN — the DESIGN step must handle the case where there is no BREAKDOWN.md by producing a single integrated plan rather than per-unit guidance, and the BUILD step must handle single-pass execution with a gate that fires once at completion rather than per-unit. Add an `## Express mode` section to both DESIGN and BUILD step files explaining the difference. Do not add express support speculatively — only where BREAKDOWN genuinely adds no value for small tasks in the domain.
 

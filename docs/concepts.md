@@ -136,6 +136,8 @@ FRAME maintains three files in `.frame/` at your project root:
 
 Completed phases are archived to `.frame/archive/phase-N.md` — a compressed summary plus the full SESSION.md content before it was wiped. Retrieve with `/frame recall phase-N`.
 
+**`run-config.md`** — optional, written at CLOSE if the cartridge supports it and the user opts in. Persists SHAPE values across sessions for repeat runs of the same cartridge against the same target. Survives new session starts — only `.frame/archive/` is wiped on `/frame load`.
+
 ---
 
 ## Pause and resume
@@ -146,8 +148,6 @@ FRAME is designed for long sessions that span multiple context windows. The paus
 - `/frame resume` restores full context: project, breakdown, current phase, active unit
 
 FRAME reminds you at every unit gate and phase gate that state is saved and it's safe to `/clear`. The context bar is visible — the decision of when to clear is yours.
-
-**Tip:** If your statusline doesn't show context usage, ask Claude Code to add a context bar to it.
 
 ---
 

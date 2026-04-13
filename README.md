@@ -42,6 +42,7 @@ FRAME then guides you from requirements through architecture, implementation, an
 | Cartridge | Domain | Output |
 |---|---|---|
 | `sw-development` | Software development — APIs, services, features | Working code, test suite |
+| `deploy` | Software deployment — VPS, cloud, containerised, serverless | Deployment log, verification report, incident summary |
 | `blog-writing` | Blog posts, articles, essays | Publishable draft |
 | `linkedin-profile` | LinkedIn profile authorship from a CV | Publish-ready profile sections |
 | `code-audit` | Code audit — quality/architecture review, security audit, or both | Prioritised findings report |
@@ -58,7 +59,6 @@ FRAME is the platform; cartridges are the product. Session quality scales with c
 
 ## Installation
 
-**From a local clone:**
 ```bash
 git clone https://github.com/SeriousByDesign/frame.git
 cd frame
@@ -260,6 +260,7 @@ Common patterns — new project kickoff, code-fix, pre-release audit, codebase h
     ├── PROJECT.md            ← session goal, stack, constraints
     ├── BREAKDOWN.md          ← work units and status
     ├── SESSION.md            ← current phase working notes
+    ├── run-config.md         ← saved SHAPE values for repeat runs (optional)
     └── archive/              ← completed phases, compressed
 ```
 
@@ -289,4 +290,4 @@ v0.3.0 — production-validated across multiple real-world sessions spanning sof
 
 This project is licensed under the MIT License.
 
-Copyright 2026 SeriousByDesign
+Created 2026 By ```SeriousByDesign```
