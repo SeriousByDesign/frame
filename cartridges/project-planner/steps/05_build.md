@@ -1,3 +1,4 @@
+
 # Step 5 · BUILD
 Role: Writer
 
@@ -95,6 +96,31 @@ FRAME ▸ BUILD complete.
 
   Summary: BACKLOG.md written — [N features across M milestones]
 
+  → Produce project-context.md? (y / n)
+    Captures stack, conventions, and project-wide constraints — loaded automatically at every /frame load for this project.
+```
+
+If `y`, write `.frame/project-context.md` using the SHAPE context and the `## Project-wide conventions` section from SESSION.md (if present) as the primary source. Fill in what was decided — do not invent content not established in dialogue:
+
+```markdown
+# project-context.md
+Project  : [goal from SHAPE]
+Stack    : [stack from SHAPE]
+Updated  : [date]
+
+## Conventions
+[Coding conventions, style decisions, tooling choices that apply project-wide — e.g. formatting rules, naming patterns, preferred libraries, aesthetic direction]
+
+## Constraints
+[Non-negotiable constraints — performance targets, accessibility requirements, security rules, platform limits]
+
+## Notes
+[Anything else every session should know — e.g. known third-party limitations, decisions already made and not up for revision]
+```
+
+Write only sections that have content — omit empty sections entirely. If no conventions, constraints, or notes surfaced during the session, skip the file and proceed to CLOSE.
+
+```
   → Advance to CLOSE? (y / pause)
 ```
 

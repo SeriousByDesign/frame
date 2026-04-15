@@ -1,4 +1,4 @@
-# sw-development/steps/01_shape.md
+
 
 # Step 1 · SHAPE
 Role: Requirements Engineer
@@ -146,6 +146,8 @@ Status : complete
 [full / contained fix — one sentence rationale]
 ```
 
+If the goal references a BACKLOG feature ID (e.g. "SITE-001"), write it to PROJECT.md — update the `Feature` field to that ID. If no ID was mentioned, leave `Feature : none`.
+
 ---
 
 ## Gate
@@ -193,6 +195,9 @@ Next SESSION.md header:
 Role   : Orchestrator
 Status : in progress
 ```
+
+---
+
 
 ---
 

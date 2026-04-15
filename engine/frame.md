@@ -113,6 +113,8 @@ Wait for explicit user response. Do not advance, do not overwrite. If "start new
    - `README.md` — confirm name, version, phase list
    - `roles.md` — load the role roster
 
+4.4. Check for `.frame/project-context.md`. If found, read it silently and hold it in context — it will be injected at the start of SHAPE. No prompt, no user interaction. If not found, proceed silently.
+
 4.5. Check for a `.git` directory in the current working directory using `test -d .git` — do not use git commands like `git rev-parse` which walk up the directory tree. If not found:
 
 ```
@@ -164,6 +166,7 @@ Started      : [date]
 Code commits : enabled (--no-code-commits to disable)
 Mode         : [express / full]
 Branch       : none
+Feature      : none
 Goal         : [to be defined in SHAPE]
 Stack        : [to be defined in SHAPE]
 Constraints  : [to be defined in SHAPE]
@@ -184,6 +187,9 @@ FRAME ▸ Cartridge loaded: [name] v[version]
         Source:  [resolved path]
         Phases:  [phase list from README]
         Commits: [code + .frame / .frame only]
+        [If project-context.md was loaded:]
+        Context: project-context.md loaded ([last-modified date])
+                 → If changed since last session, review completed work for compliance.
 
         → Starting Phase 1 · SHAPE
 ```
@@ -191,6 +197,8 @@ FRAME ▸ Cartridge loaded: [name] v[version]
 8. Immediately begin the first cartridge step (`steps/01_shape.md`).
 
    If a run-config was loaded in step 4.7, inject it at the start of SHAPE as prior context — before the interview begins. The active role uses it naturally: presenting a summary of known values, confirming with the user, and asking only for anything missing or changed. Do not announce the injection as a system event.
+
+   If project-context.md was loaded in step 4.4, inject it at the start of SHAPE alongside run-config (or alone if no run-config). The active role treats it as background context — it informs every question and decision without being narrated. Do not announce the injection.
 
 ---
 
@@ -200,6 +208,7 @@ FRAME ▸ Cartridge loaded: [name] v[version]
 
 2. Read `.frame/` files in order:
    - `.frame/PROJECT.md`
+   - `.frame/project-context.md` (if it exists — read silently, hold in context)
    - `.frame/BREAKDOWN.md` (if it exists)
    - `.frame/SESSION.md`
    - All `.frame/archive/phase-*.md` files that exist (read in order) — full phase history; SESSION.md no longer contains prior phase output after /clear
@@ -379,6 +388,14 @@ The Orchestrator writes this from session knowledge — same content that would 
    ```
 
    If no actionable improvement is identified, skip this step entirely — do not write the section, do not output anything. "Nothing to report" is the expected outcome for a clean run.
+
+5.4. If `BACKLOG.md` exists in the project root and `Feature` in `.frame/PROJECT.md` is not `none`, update the matching entry's status:
+
+   - Find the entry whose ID matches the `Feature` field
+   - Change `Status : pending` to `Status : done`
+   - Do not modify any other field or entry
+
+   If the feature ID is not found in BACKLOG.md, skip silently — do not warn.
 
 5.5. If the cartridge README declares `Run config: supported`, ask the user:
 

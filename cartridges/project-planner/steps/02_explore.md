@@ -1,3 +1,4 @@
+
 # Step 2 · EXPLORE
 Role: Architect
 
@@ -49,6 +50,22 @@ MILESTONES and FEATURES will operate on the delta only. Do not re-plan completed
 
 ---
 
+## Project-wide conventions
+
+After the area list is confirmed, run a short conventions pass — one question:
+
+```
+Before we move to milestones: are there decisions that apply across all areas of this project?
+For example: a tool or platform every area depends on, a style or format that must be consistent throughout, a constraint that affects every feature, or an approach that's already decided and not up for revision.
+(skip if nothing comes to mind — these can be captured later)
+```
+
+Do not prompt for specific categories — let the user surface what matters for their domain. Accept as prose. Probe once if the answer is vague ("can you be more specific about X?"), then move on.
+
+If anything is stated, write it to SESSION.md under a `## Project-wide conventions` heading. If the user skips, omit the section.
+
+---
+
 ## Output
 
 Produce a numbered area list. For existing-codebase paths, annotate each area with current state.
@@ -86,3 +103,6 @@ FRAME ▸ EXPLORE complete.
   SESSION.md updated.
   → Advance to MILESTONES? (y / adjust / pause)
 ```
+
+---
+

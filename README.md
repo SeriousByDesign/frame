@@ -180,6 +180,12 @@ You have my permission to run this session fully autonomously — do not stop at
 Domain: code audit — quality/architecture review and security audit of existing codebases, either as separate lenses or combined in a single session. A completed session produces a prioritised findings report as a standalone markdown file.
 ```
 
+**How to save tokens:** running FRAME autonomously can lead Claude Code to enter Plan Mode (not a bad thing at all), but it won't stop at any gates to let you `/clear` the context and save tokens. Think about adding the following to your instruction after "You have my permission..." to keep token consumption under your control:
+
+```
+Exception: always pause at the "All state saved — safe to /clear and resume" line so the user can clear the context window before continuing.
+```
+
 **When this works well:** well-scoped tasks with a clear domain (generating a cartridge, writing a blog post, auditing a known codebase). The model has enough context to make gate decisions without you.
 
 **When to stay interactive:** anything where a wrong assumption at BREAKDOWN or DESIGN would silently propagate — ambiguous requirements, unfamiliar codebases, tasks with significant architectural decisions. A bad judgment call mid-session is harder to catch when gates are skipped.
@@ -261,6 +267,7 @@ Common patterns — new project kickoff, code-fix, pre-release audit, codebase h
     ├── BREAKDOWN.md          ← work units and status
     ├── SESSION.md            ← current phase working notes
     ├── run-config.md         ← saved SHAPE values for repeat runs (optional)
+    ├── project-context.md    ← project-wide decisions and conventions (optional)
     └── archive/              ← completed phases, compressed
 ```
 

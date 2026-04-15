@@ -1,3 +1,4 @@
+
 # Step 1 · SHAPE
 Role: Deployment Analyst
 
@@ -140,7 +141,7 @@ FRAME ▸ SHAPE complete.
   Summary: [deployment type + target + artefact + rollout strategy]
   Open:    [anything unresolved — missing credentials, unclear rollback, etc.]
 
-  PROJECT.md written — reuse this session with /frame resume for repeat deployments.
+  PROJECT.md written. To skip re-interview on next deployment, save run config at CLOSE.
   SESSION.md updated.
   → Advance to DEPLOY? (y / adjust / pause)
 ```
@@ -153,3 +154,6 @@ Next SESSION.md header:
 Role   : Deployment Engineer
 Status : in progress
 ```
+
+---
+

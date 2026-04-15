@@ -138,6 +138,8 @@ Completed phases are archived to `.frame/archive/phase-N.md` — a compressed su
 
 **`run-config.md`** — optional, written at CLOSE if the cartridge supports it and the user opts in. Persists SHAPE values across sessions for repeat runs of the same cartridge against the same target. Survives new session starts — only `.frame/archive/` is wiped on `/frame load`.
 
+**`project-context.md`** — optional, user-owned. Stores project-wide decisions, conventions, and constraints that apply across all sessions for a project — tech stack choices, naming conventions, architectural rules. Loaded silently at every `/frame load` and `/frame resume` and injected at SHAPE start. Written manually or produced by the `project-planner` cartridge at its BUILD gate.
+
 ---
 
 ## Pause and resume
