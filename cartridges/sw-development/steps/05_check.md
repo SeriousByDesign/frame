@@ -1,4 +1,4 @@
-# sw-development/steps/05_check.md
+
 
 # Step 5 · CHECK
 Role: Code Reviewer → QA Engineer
@@ -35,6 +35,9 @@ Address every item flagged during BUILD explicitly — do not skip them.
 
 **File reference validation**
 If any fix in this session changed a file path reference (in documentation, configuration, invocation examples, or import statements): verify the referenced file exists at the stated path. Do not rely on tests passing as a proxy — tests may not exercise the referenced path. If the file does not exist, treat it as a BLOCKING issue and loop back to BUILD.
+
+**Dependencies**
+What else in this project references or depends on what changed? Check: documentation, configuration files, and any other files that invoke, reference, or describe the changed behaviour. If anything is stale or broken, it is a non-blocking issue at minimum — blocking if it breaks an existing workflow.
 
 ### Output format
 

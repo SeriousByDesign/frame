@@ -144,6 +144,19 @@ Status : complete
 \`\`\`
 ```
 
+### Acceptance Criteria (SHAPE only)
+
+If the cartridge collects user-defined requirements — i.e. SHAPE interviews the user about what "done" looks like — the SHAPE output block **must** include a `## Acceptance Criteria` section. The engine reads this at CLOSE to verify the session outcome before marking work complete or flipping BACKLOG status.
+
+```markdown
+## Acceptance Criteria
+[user-defined criteria from SHAPE interview — specific and testable]
+```
+
+Cartridges with structurally-defined outputs (e.g. document-and-commit, codebase-analysis) are exempt — their "done" is defined by the cartridge structure, not user input. The engine checks for the section's presence: if absent, the acceptance check is skipped silently.
+
+---
+
 ### Gate block
 Every step file must have a complete gate block with both required fields:
 

@@ -153,6 +153,18 @@ FRAME reminds you at every unit gate and phase gate that state is saved and it's
 
 ---
 
+## Context management
+
+FRAME's gate and unit structure gives you natural control points. A few techniques worth knowing:
+
+**`/clear` at a gate** is the cleanest reset. All phase state is archived — `/frame resume` restores full context from files, not from CC's memory. You control exactly what carries forward.
+
+**`/compact <hint>` mid-phase** is an alternative when you don't want to lose phase context but the session is heavy with stale exploration. Pass a hint to steer what the summary keeps: `/compact focus on the DESIGN decisions, drop the debugging`. Without a hint, compact at high context is lossy in unpredictable ways.
+
+**Rewind a wrong path** instead of correcting it. If CC tries an approach mid-phase that doesn't work, double-Esc (or `/rewind`) jumps back to just before the wrong turn. Re-prompt with what you learned. This keeps useful file reads, drops the failed attempt, and avoids paying for it in every subsequent turn — more effective than a correction message, especially in BUILD.
+
+---
+
 ## Auto-commit
 
 FRAME auto-commits at every gate close and every unit complete. Commits include both `.frame/` state files and working code — each commit is a coherent snapshot of process state and output together.

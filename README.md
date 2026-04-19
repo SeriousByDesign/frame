@@ -7,6 +7,12 @@
 A prompt-native workflow engine for Claude Code. FRAME guides AI sessions through structured, role-switched workflows using swappable domain cartridges — with no tooling overhead, no multi-agent complexity, and no file sprawl.
 
 ---
+[![FRAME Demo](https://img.youtube.com/vi/PMo5p-Ay0BI/0.jpg)](https://youtu.be/PMo5p-Ay0BI)
+
+*Demo - watch on YouTube: skill-creation cartridge building a Jira CLI skill from scratch.*
+
+
+---
 
 ## What it does
 
@@ -42,6 +48,8 @@ FRAME then guides you from requirements through architecture, implementation, an
 | Cartridge | Domain | Output |
 |---|---|---|
 | `sw-development` | Software development — APIs, services, features | Working code, test suite |
+| `sw-development-tdd` | TDD-first software development — test list before implementation | Working code, passing test suite |
+| `sw-development-cd` | UI/frontend development — Claude Design prototype to production | Working production app, deployed |
 | `deploy` | Software deployment — VPS, cloud, containerised, serverless | Deployment log, verification report, incident summary |
 | `blog-writing` | Blog posts, articles, essays | Publishable draft |
 | `linkedin-profile` | LinkedIn profile authorship from a CV | Publish-ready profile sections |
@@ -249,6 +257,9 @@ Common patterns — new project kickoff, code-fix, pre-release audit, codebase h
 
 ~/.frame/cartridges/
 ├── sw-development/
+├── sw-development-tdd/
+├── sw-development-cd/
+├── deploy/
 ├── blog-writing/
 ├── code-audit/
 ├── codebase-analysis/
@@ -289,7 +300,7 @@ I didn't know if anything like that existed. I built FRAME to find out.
 
 ## Status
 
-v0.3.0 — production-validated across multiple real-world sessions spanning software development, blog writing, LinkedIn profile creation, code auditing, codebase analysis, project planning, and cartridge authorship. Ten cartridges included. Core engine decisions closed. Active development continues — contributions welcome.
+v0.4.0 — production-validated across multiple real-world sessions spanning software development, blog writing, LinkedIn profile creation, code auditing, codebase analysis, project planning, and cartridge authorship. Thirteen cartridges included. Core engine decisions closed. Active development continues — contributions welcome.
 
 ---
 

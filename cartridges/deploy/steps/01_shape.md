@@ -1,4 +1,3 @@
-
 # Step 1 · SHAPE
 Role: Deployment Analyst
 
@@ -66,7 +65,7 @@ Based on Stage 1, ask for the relevant subset of:
 - Stakeholder notification plan (who needs to know, how, when)
 - Maintenance window if applicable
 
-## Verification criteria
+## Acceptance Criteria
 
 Once deployment context is established, ask:
 
@@ -113,7 +112,7 @@ Status : complete
 **Config:** [env vars, secrets, config differences]
 **Migrations:** [SQL scripts / migration commands, or none]
 
-## Verification Criteria
+## Acceptance Criteria
 
 Baseline (always checked):
 - New artefact version confirmed running
@@ -154,6 +153,3 @@ Next SESSION.md header:
 Role   : Deployment Engineer
 Status : in progress
 ```
-
----
-

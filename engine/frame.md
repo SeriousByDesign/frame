@@ -98,14 +98,14 @@ FRAME ▸ Existing session found in this directory.
         Project : [goal from PROJECT.md]
         Phase   : [current phase from SESSION.md]
 
-        Starting a new session will clear all phase archives.
+        Starting a new session will clear all session state (archives, BREAKDOWN, TEST-LIST).
 
         → Resume existing session? (/frame resume)
         → Start new session? (overwrites .frame/ state)
         → Abort?
 ```
 
-Wait for explicit user response. Do not advance, do not overwrite. If "start new session", run `rm -rf .frame/archive/` then proceed. If "resume", stop and run `/frame resume`. If "abort", stop.
+Wait for explicit user response. Do not advance, do not overwrite. If "start new session", run `rm -rf .frame/archive/ .frame/BREAKDOWN.md .frame/TEST-LIST.md` then proceed. If "resume", stop and run `/frame resume`. If "abort", stop.
 
 3. If `--no-code-commits` flag is present, record it in PROJECT.md — auto-commits will include `.frame/` files only for this session.
 
@@ -134,7 +134,16 @@ STOP. Do not advance, do not write any files, do not begin SHAPE. Wait for expli
 - `skip` — skip auto-commit for this session only, record `Code commits : disabled (no .git)` in PROJECT.md, proceed
 - `never` — disable auto-commit for the rest of this session, record `Code commits : disabled (user)` in PROJECT.md, proceed
 
-If `.git` is found, proceed silently — no output.
+If `.git` is found:
+
+```
+FRAME ▸ .git found in [cwd].
+        → Use auto-commits this session? (y / skip)
+```
+
+STOP. Wait for explicit user response.
+- `y` — record `Code commits : enabled` in PROJECT.md, proceed
+- `skip` — record `Code commits : disabled (user)` in PROJECT.md, proceed
 
 4.6. If the cartridge README contains `Express: supported`, ask session mode before writing PROJECT.md:
 
@@ -356,9 +365,31 @@ FRAME ▸ Session branch: [branch name]
 
 ```markdown
 ## CLOSE
-Status : complete
-Branch : [merged / not merged / none]
+Status     : complete
+Branch     : [merged / not merged / none]
+Acceptance : [set by step 3.5]
 ```
+
+3.5. Acceptance check — conditional:
+
+   Search `.frame/archive/phase-*.md` for the file whose `Phase:` field contains `SHAPE`. Look for a `## Acceptance Criteria` section in that file.
+
+   If not found (no SHAPE archive or no section), skip silently — set `Acceptance : n/a` in the CLOSE block and proceed.
+
+   If found, produce a checklist and confirm with the user:
+
+   ```
+   FRAME ▸ Acceptance check
+
+     [ ] [criterion 1]
+     [ ] [criterion 2]
+     ...
+
+     → All criteria met? (y / n)
+   ```
+
+   - `y` — set `Acceptance : passed` in the CLOSE block. Proceed.
+   - `n` — ask which criteria remain unmet. Set `Acceptance : partial — [unmet items]` in the CLOSE block. The Handoff (step 4) must include an `Outstanding:` line listing unmet criteria. Step 5.4 (BACKLOG flip) is skipped.
 
 4. Write a `## Handoff` section to `.frame/PROJECT.md` — append, do not overwrite:
 
@@ -367,6 +398,8 @@ Branch : [merged / not merged / none]
 Closed : [date]
 
 [2–3 lines: what was built, key outputs]
+
+Outstanding: [unmet acceptance criteria — omit if Acceptance : passed or n/a]
 
 How to run:
 [commands from the session — run, test, build]
@@ -389,7 +422,7 @@ The Orchestrator writes this from session knowledge — same content that would 
 
    If no actionable improvement is identified, skip this step entirely — do not write the section, do not output anything. "Nothing to report" is the expected outcome for a clean run.
 
-5.4. If `BACKLOG.md` exists in the project root and `Feature` in `.frame/PROJECT.md` is not `none`, update the matching entry's status:
+5.4. If `BACKLOG.md` exists in the project root and `Feature` in `.frame/PROJECT.md` is not `none`, and `Acceptance` in the CLOSE block is not `partial`, update the matching entry's status:
 
    - Find the entry whose ID matches the `Feature` field
    - Change `Status : pending` to `Status : done`

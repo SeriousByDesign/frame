@@ -1,4 +1,3 @@
-
 # Step 5 · BUILD
 Role: Writer
 
@@ -62,6 +61,28 @@ Write features in milestone sequence. Separate milestones with a horizontal rule
 
 ---
 
+## INT-001 entry (software projects only)
+
+If `Stack` in the SHAPE context describes a software project, append an INT milestone as the final milestone — after all feature milestones, before the execution order section:
+
+```markdown
+---
+
+## INT — Integration
+
+### INT-001 · Integration test
+Goal       : Verify the application works end-to-end across all implemented features
+Acceptance : All primary user flows pass; no regressions from feature interactions
+Scope      : Full application — all milestones; excludes performance and load testing
+Systems    : [leave blank — determined at execution time]
+Path       : contained
+Status     : pending
+```
+
+Non-software projects (writing, research, marketing): skip this section.
+
+---
+
 ## Execution order
 
 After all milestone features are written, append an execution order section as the final section of BACKLOG.md.
@@ -72,6 +93,7 @@ Ordering rules — apply in priority order:
 3. **Conditional features** — implementation items follow their evaluation item; mark as conditional
 4. **User preferences** — any ordering preferences stated in FEATURES override the default within their milestone
 5. **Risk-first default** — where no other rule applies, features that could reveal blockers or invalidate assumptions go before features that build on settled ground
+6. **INT-001 always last** — the integration test executes after all feature milestones are complete
 
 ```markdown
 ---
