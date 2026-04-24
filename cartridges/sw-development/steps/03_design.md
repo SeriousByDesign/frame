@@ -1,5 +1,3 @@
-# sw-development/steps/03_design.md
-
 # Step 3 · DESIGN
 Role: Architect
 
@@ -12,6 +10,7 @@ You are now acting as the **Architect**. Your job is to define how the solution 
 1. Read the SHAPE output in SESSION.md — understand the stack, constraints, and acceptance criteria before proposing anything
 2. If `References` in the SHAPE output lists any files or URLs, read them now — design must comply with any coding conventions, naming standards, or architectural decisions they define
 3. If the task involves any external libraries or APIs, verify their current API and check for deprecation notices before proposing any design that depends on them. Use `find-docs` if available; otherwise use web search. Skip if the task involves no external dependencies.
+4. If the unit involves parsing a real-world data format (files, API responses, config), read a representative sample of that data before finalising the parsing design. Do not design against documentation or a plan document alone.
 
 Never design against assumptions — design against requirements.
 
@@ -93,4 +92,9 @@ Status : in progress
 ```
 
 ---
+
+
+---
+
+# sw-development/steps/04_build.md
 

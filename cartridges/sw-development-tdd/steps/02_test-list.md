@@ -55,10 +55,18 @@ Here are the test scenarios I'd cover, in the order I'd tackle them:
 
 Sequencing rationale: [1-2 sentences on why this order]
 
+Scope: [contained / project-scale — one sentence rationale]
+
 Any scenarios missing? Or adjust the order before I write .frame/TEST-LIST.md?
 ```
 
-Take the user's feedback. Adjust. Do not write .frame/TEST-LIST.md until the user confirms.
+**Scope assessment criteria:**
+- **Contained** — scenarios address a single cohesive behavior change; one BUILD loop can work through them without a `/clear`
+- **Project-scale** — scenarios cluster into distinct feature areas, or span independent behaviors where partial delivery would have independent value
+
+If **project-scale**, fire the project-scale gate (below) instead of continuing.
+
+Take the user's feedback. Adjust. Do not write `.frame/TEST-LIST.md` until the user confirms.
 
 ---
 
@@ -74,7 +82,7 @@ On confirm, write `.frame/TEST-LIST.md`:
 - [ ] [scenario description]
 ```
 
-The list is ordered — the top item is tackled first in BUILD. Sequencing rationale is captured in SESSION.md, not in .frame/TEST-LIST.md (which BUILD reads and modifies directly).
+The list is ordered — the top item is tackled first in BUILD. Sequencing rationale is captured in SESSION.md, not in `.frame/TEST-LIST.md` (which BUILD reads and modifies directly).
 
 Write the following block to SESSION.md:
 
@@ -96,6 +104,62 @@ Status : complete
 ---
 
 ## Gate
+
+**Project-scale path** (scope assessment: project-scale):
+
+Before presenting the gate, write `.frame/HANDOFF.md`:
+
+```markdown
+# HANDOFF
+Source  : sw-development-tdd 0.1
+Target  : project-planner
+Created : [date]
+Gate    : Phase 2 · TEST LIST project-scale
+
+## Brief
+[SHAPE summary — verbatim from phase-1.md summary block]
+
+## Work done
+Test scenarios drafted (not yet written to TEST-LIST.md):
+[the scenario list as proposed]
+
+## Context
+Goal        : [one-line goal from SHAPE]
+Stack       : [stack from SHAPE]
+Constraints : [constraints from SHAPE]
+Out of scope: [out of scope from SHAPE]
+```
+
+Commit HANDOFF.md: `phase-2 TEST LIST — project-scale escalation`
+
+Then present:
+
+```
+FRAME ▸ TEST LIST — scope assessment.
+
+  Scale:   This scope is too large for a single sw-development-tdd session.
+           [scenarios cluster into X distinct feature areas — one sentence rationale]
+           Recommend running project-planner to produce a structured
+           backlog before building.
+
+  → Run project-planner with SHAPE output as context? (y / adjust / pause)
+```
+
+If `y`:
+```
+FRAME ▸ Scope confirmed as project-scale.
+
+  Next: /frame load project-planner
+
+  SESSION.md written with SHAPE output. HANDOFF.md ready.
+  All state saved — safe to /clear and start project-planner.
+```
+
+If `adjust` — return to the scenario list; re-evaluate scope after changes.
+
+---
+
+**Contained path** (scope assessment: contained):
 
 ```
 FRAME ▸ TEST LIST complete.

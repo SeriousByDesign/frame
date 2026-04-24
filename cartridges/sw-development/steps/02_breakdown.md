@@ -1,4 +1,3 @@
-
 # Step 2 · BREAKDOWN
 Role: Orchestrator
 
@@ -41,6 +40,18 @@ Based on what we've defined in SHAPE, here's my suggested breakdown:
   Unit 3 · [name]     [small / medium / large]  after: Unit 1
   Unit 4 · [name]     [small / medium / large]  after: Unit 2, Unit 3
 
+  Scope: [contained / project-scale — one sentence rationale]
+```
+
+**Scope assessment criteria:**
+- **Contained** — units form a single cohesive feature area; 3–7 units; no natural milestone boundary where partial delivery would have independent value
+- **Project-scale** — 7+ units that cluster into distinct delivery milestones, or units that span multiple feature areas where partial delivery makes sense independently
+
+If **project-scale**, fire the project-scale gate (below) instead of continuing.
+
+If **contained**, append to the proposal:
+
+```
 Does this look right? For each unit you can:
   → split   — if it feels too large
   → merge   — if two units are trivially small
@@ -76,7 +87,61 @@ On confirm, write BREAKDOWN.md:
 
 ## Gate
 
-**Full path:**
+**Project-scale path** (scope assessment: project-scale):
+
+Before presenting the gate message, write `.frame/HANDOFF.md`:
+
+```markdown
+# HANDOFF
+Source  : sw-development 1.0
+Target  : project-planner
+Created : [date]
+Gate    : Phase 2.5 · BREAKDOWN — project-scale
+
+## Brief
+[SHAPE summary — copied verbatim from .frame/archive/phase-1.md summary block]
+
+## Work done
+[Unit list from the breakdown proposal, with sizes and dependencies]
+Scope assessment: project-scale — [one sentence rationale]
+
+## Context
+Goal        : [from PROJECT.md]
+Stack       : [from PROJECT.md]
+Constraints : [from SESSION.md SHAPE block]
+Out of scope: [from SESSION.md SHAPE block]
+```
+
+If code commits are enabled, commit immediately: `FRAME: HANDOFF.md — referred to project-planner`
+
+Then present:
+
+```
+FRAME ▸ BREAKDOWN — scope assessment.
+
+  Scale:   This scope is too large for a single sw-development session.
+           [N units across [X] distinct delivery areas — one sentence rationale]
+           Recommend running project-planner to produce a structured
+           backlog before building.
+
+  → Run project-planner with SHAPE output as context? (y / adjust / pause)
+```
+
+If `y`:
+```
+FRAME ▸ Scope confirmed as project-scale.
+
+  HANDOFF.md written — project-planner will load this context automatically.
+  Next: /frame load project-planner
+
+  All state saved — safe to /clear and start project-planner.
+```
+
+If `adjust` — return to the unit list; re-evaluate scope after changes.
+
+---
+
+**Full path** (scope assessment: contained):
 
 ```
 FRAME ▸ BREAKDOWN complete.
@@ -119,6 +184,3 @@ Next SESSION.md header:
 Role   : Developer
 Status : in progress
 ```
-
----
-

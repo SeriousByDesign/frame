@@ -144,19 +144,6 @@ Status : complete
 \`\`\`
 ```
 
-### Acceptance Criteria (SHAPE only)
-
-If the cartridge collects user-defined requirements — i.e. SHAPE interviews the user about what "done" looks like — the SHAPE output block **must** include a `## Acceptance Criteria` section. The engine reads this at CLOSE to verify the session outcome before marking work complete or flipping BACKLOG status.
-
-```markdown
-## Acceptance Criteria
-[user-defined criteria from SHAPE interview — specific and testable]
-```
-
-Cartridges with structurally-defined outputs (e.g. document-and-commit, codebase-analysis) are exempt — their "done" is defined by the cartridge structure, not user input. The engine checks for the section's presence: if absent, the acceptance check is skipped silently.
-
----
-
 ### Gate block
 Every step file must have a complete gate block with both required fields:
 
@@ -257,6 +244,42 @@ These runtime behaviours are proven across real FRAME sessions. Apply the ones r
 **Path variants.** Cartridges may define multiple phase paths based on scope complexity, determined at the SHAPE gate. The standard path runs all phases in sequence. A shorter path skips phases that add no value for the problem at hand — typically DESIGN when the implementation approach is unambiguous, or BREAKDOWN when SHAPE confirms a single self-contained unit with no decomposition needed. Skipped phases must be declared in the cartridge README under `## Path variants`, and the SHAPE gate block must carry the fork instruction explicitly. See `sw-development` for a reference implementation. Apply only where the domain genuinely warrants it — not every cartridge needs variants.
 
 **Two-pass CHECK.** For domains where quality review and verification are distinct concerns, split CHECK into two sequential passes with separate roles and output formats. Complete the first pass fully before starting the second.
+
+**Escalation gate (HANDOFF.md).** Use when a cartridge detects mid-session that the scope exceeds what it can handle and must refer to another cartridge. This is distinct from pipeline handoff (one cartridge completes normally and the user starts the next manually) — escalation interrupts an in-progress session and needs to preserve state for the receiving cartridge.
+
+Escalation gate checklist:
+```
+☐ Write .frame/HANDOFF.md before presenting the gate message
+☐ Brief copied verbatim from SHAPE archive — no summarising
+☐ Work done captures all state produced before the gate fired
+☐ Target matches the exact registered cartridge name
+☐ Commit HANDOFF.md if code commits are enabled
+```
+
+HANDOFF.md schema:
+```markdown
+# HANDOFF
+Source  : [cartridge-name] [version]
+Target  : [cartridge-name]
+Created : [date]
+Gate    : [phase] · [gate-name]
+
+## Brief
+[SHAPE summary — verbatim from phase-1.md summary block]
+
+## Work done
+[state produced before the gate fired — content is gate-specific]
+
+## Context
+Goal        : [one-line goal]
+Stack       : [stack]
+Constraints : [constraints]
+Out of scope: [out of scope]
+```
+
+The receiving cartridge's SHAPE step must include a `## If loaded via handoff` section. If HANDOFF.md exists and Target matches, present pre-populated content for user confirmation. On `y` — delete HANDOFF.md and commit deletion if commits enabled, then skip SHAPE and advance. On `adjust` — allow edits to Brief/Context, re-present. On `abort` — leave file intact, exit. Delete on confirmed `y` only — not on file read, so an aborted load leaves the handoff available for retry.
+
+See `sw-development/steps/02_breakdown.md` (project-scale gate) and `project-planner/steps/01_shape.md` (handoff receiver) for reference implementations.
 
 ---
 

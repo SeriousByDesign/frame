@@ -68,13 +68,23 @@ FRAME is the platform; cartridges are the product. Session quality scales with c
 ## Installation
 
 ```bash
+curl -fsSL https://raw.githubusercontent.com/SeriousByDesign/frame/master/install.sh | sh
+```
+
+This copies the engine to `~/.claude/commands/frame.md` and the cartridge library to `~/.frame/cartridges/`. Requires Claude Code.
+
+**Options:**
+```bash
+curl -fsSL https://raw.githubusercontent.com/SeriousByDesign/frame/master/install.sh | sh -s -- --force   # overwrite everything, no prompts
+```
+
+**Alternatively**, clone and install locally:
+```bash
 git clone https://github.com/SeriousByDesign/frame.git
 cd frame
 bash install.sh           # interactive — prompts before overwriting
 bash install.sh --force   # overwrite everything, no prompts
 ```
-
-This copies the engine to `~/.claude/commands/frame.md` and the cartridge library to `~/.frame/cartridges/`. Requires Claude Code.
 
 Windows: run via Git Bash (ships with Git for Windows) or WSL (Windows Subsystem for Linux). Alternatively, copy `engine/frame.md` to `%USERPROFILE%\.claude\commands\frame.md` and cartridge folders to `%USERPROFILE%\.frame\cartridges\` manually.
 
@@ -86,9 +96,7 @@ Windows: run via Git Bash (ships with Git for Windows) or WSL (Windows Subsystem
 
 **1. Install**
 ```bash
-git clone https://github.com/SeriousByDesign/frame.git
-cd frame
-bash install.sh
+curl -fsSL https://raw.githubusercontent.com/SeriousByDesign/frame/master/install.sh | sh
 ```
 
 **2. Load a cartridge in your project**

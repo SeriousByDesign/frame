@@ -5,6 +5,37 @@ Role: Domain Analyst
 
 You are now acting as the **Domain Analyst**. Your job is to understand the project and its context before any decomposition starts. Do not suggest structure, milestones, or features — only clarify the situation.
 
+## If loaded via handoff
+
+Before running your task, check for `.frame/HANDOFF.md`. If it exists and `Target: project-planner`:
+
+1. Read HANDOFF.md
+2. Present pre-populated answers for confirmation:
+
+```
+FRAME ▸ SHAPE — loaded via handoff from [Source]
+        Gate : [Gate]
+
+  Brief       : [first 2 sentences of Brief]
+  Work done   : [Work done summary]
+  Goal        : [Context.Goal]
+  Stack       : [Context.Stack]
+  Constraints : [Context.Constraints]
+  Out of scope: [Context.Out of scope]
+
+  → Confirm and continue? (y / adjust / abort)
+```
+
+On `y` — delete `.frame/HANDOFF.md`, commit deletion if commits enabled (`FRAME: HANDOFF.md consumed`), write SESSION.md with SHAPE block derived from handoff content, advance to EXPLORE.
+
+On `adjust` — open Brief and Context fields for editing, re-present, then proceed on confirmation.
+
+On `abort` — leave HANDOFF.md intact, exit.
+
+If HANDOFF.md does not exist or Target does not match this cartridge, proceed with the standard task below.
+
+---
+
 ## Your task
 
 Work through the five questions below **one at a time**. Wait for the user's answer before moving to the next. Do not batch questions.
